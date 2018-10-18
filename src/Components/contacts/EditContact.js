@@ -29,7 +29,6 @@ class EditContact extends Component {
 
   onSubmit = async (dispatch, e) => {
     e.preventDefault();
-
     const { name, email, phone } = this.state;
 
     // Check For Errors
@@ -45,13 +44,15 @@ class EditContact extends Component {
       this.setState({ errors: { phone: "Phone is Required" } });
       return;
     }
-    const newContact = { name, email, phone };
+    const updateContact = { name, email, phone };
 
-    const res = await axios.post(
-      "https://jsonplaceholder.typicode.com/users",
-      newContact
+    const { id } = this.props.match.params;
+    const res = await axios.put(
+      `https://jsonplaceholder.typicode.com/users/${id}`,
+      updateContact
     );
-    dispatch({ type: "ADD_CONTACT", payload: res.data });
+
+    dispatch({ type: "UPDATE_CONTACT", payload: res.data });
 
     // Clear State
     this.setState({ name: "", email: "", phone: "", errors: {} });
