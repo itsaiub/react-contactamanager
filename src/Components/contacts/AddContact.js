@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import uuid from "uuid";
+import axios from "axios";
 import TextInputGroup from "../layout/TextInputGroup";
 import { Consumer } from "../../context";
 
@@ -31,12 +31,14 @@ class AddContact extends Component {
       return;
     }
     const newContact = {
-      id: uuid(),
-      name, 
+      name,
       email,
       phone
     };
-    dispatch({ type: "ADD_CONTACT", payload: newContact });
+
+    axios
+      .post("https://jsonplaceholder.typicode.com/users", newContact)
+      .then(res => dispatch({ type: "ADD_CONTACT", payload: res.data }));
 
     // Clear State
     this.setState({
@@ -46,7 +48,7 @@ class AddContact extends Component {
       errors: {}
     });
 
-    this.props.history.push('/');
+    this.props.history.push("/");
   };
 
   render() {
