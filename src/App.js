@@ -3,6 +3,7 @@ import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 import Contacts from "./Components/contacts/Contacts";
 import Header from "./Components/layout/Header";
 import AddContact from "./Components/contacts/AddContact";
+import EditContact from "./Components/contacts/EditContact";
 import About from "./Components/pages/About";
 import { Provider } from "./context";
 import "bootstrap/dist/css/bootstrap.min.css";
@@ -21,6 +22,7 @@ class App extends Component {
               <Switch>
                 <Route exact path="/" component={Contacts} />
                 <Route exact path="/contact/add" component={AddContact} />
+                <Route exact path="/contact/edit/:id" component={EditContact} />
                 <Route path="/about/" component={About} />
                 <Route path="/about/:id" component={About} />
                 <Route path="/test" component={Test} />
