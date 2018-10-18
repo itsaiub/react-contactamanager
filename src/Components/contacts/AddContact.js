@@ -7,7 +7,8 @@ class AddContact extends Component {
   state = {
     name: "",
     email: "",
-    phone: ""
+    phone: "",
+    errors: {}
   };
 
   onChange = e => this.setState({ [e.target.name]: e.target.value });
@@ -16,9 +17,22 @@ class AddContact extends Component {
     e.preventDefault();
     const { name, email, phone } = this.state;
 
+    // Check For Errors
+    if (name === "") {
+      this.setState({ errors: { name: "Name is Required" } });
+      return;
+    }
+    if (email === "") {
+      this.setState({ errors: { email: "Email is Required" } });
+      return;
+    }
+    if (phone === "") {
+      this.setState({ errors: { phone: "Phone is Required" } });
+      return;
+    }
     const newContact = {
       id: uuid(),
-      name,
+      name, 
       email,
       phone
     };
@@ -28,12 +42,15 @@ class AddContact extends Component {
     this.setState({
       name: "",
       email: "",
-      phone: ""
+      phone: "",
+      errors: {}
     });
+
+    this.props.history.push('/');
   };
 
   render() {
-    const { name, email, phone } = this.state;
+    const { name, email, phone, errors } = this.state;
 
     return (
       <Consumer>
@@ -51,6 +68,7 @@ class AddContact extends Component {
                     placeholder="Enter name"
                     value={name}
                     onChange={this.onChange}
+                    error={errors.name}
                   />
 
                   <TextInputGroup
@@ -60,6 +78,7 @@ class AddContact extends Component {
                     value={email}
                     type="email"
                     onChange={this.onChange}
+                    error={errors.email}
                   />
 
                   <TextInputGroup
@@ -68,6 +87,7 @@ class AddContact extends Component {
                     placeholder="Enter phone"
                     value={phone}
                     onChange={this.onChange}
+                    error={errors.phone}
                   />
                   <input
                     type="submit"
