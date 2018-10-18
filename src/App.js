@@ -7,6 +7,7 @@ import About from "./Components/pages/About";
 import { Provider } from "./context";
 import "bootstrap/dist/css/bootstrap.min.css";
 import "./App.css";
+import NotFound from "./Components/pages/NotFound";
 
 class App extends Component {
   render() {
@@ -21,6 +22,7 @@ class App extends Component {
                 <Route exact path="/contact/add" component={AddContact} />
                 <Route path="/about/" component={About} />
                 <Route path="/about/:id" component={About} />
+                <Route component={NotFound} />
               </Switch>
             </div>
           </React.Fragment>
