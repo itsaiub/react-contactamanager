@@ -1,9 +1,10 @@
-import React, { Component } from 'react';
-import Contacts from './Components/Contacts'
-import Header from './Components/Header'
+import React, { Component } from "react";
+import Contacts from "./Components/contacts/Contacts";
+import Header from "./Components/layout/Header";
+import AddContact from "./Components/contacts/AddContact";
 import { Provider } from "./context";
-import 'bootstrap/dist/css/bootstrap.min.css';
-import './App.css';
+import "bootstrap/dist/css/bootstrap.min.css";
+import "./App.css";
 
 class App extends Component {
   render() {
@@ -12,10 +13,11 @@ class App extends Component {
         <React.Fragment>
           <Header branding="Contact Manager" />
           <div className="container">
+            <AddContact />
             <Contacts />
           </div>
         </React.Fragment>
-      </Provider>   
+      </Provider>
     );
   }
 }
